@@ -2,29 +2,13 @@ package Database;
 
 import model.UserModel;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserDao {
-  private String db_user = "postgres";
-  private String db_password = "";
-  private String url = "jdbc:postgresql://localhost:5432/postgres";
+
   private Statement statement = null;
-
-  // Connect to database
-  public Connection getConnection() {
-
-    Connection connection = null;
-
-    try {
-      connection = DriverManager.getConnection(url, db_user, db_password);
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
-    }
-
-    return connection;
-  }
+  static Connection connection = DatabaseConnection.getConnection();
 
   // Create or drop table
 
@@ -33,7 +17,7 @@ public class UserDao {
     String sql = "CREATE TABLE IF NOT EXISTS USR (id SERIAL PRIMARY KEY, name VARCHAR(40) NOT NULL, password VARCHAR(40) NOT NULL)";
 
     try {
-      statement = getConnection().createStatement();
+      statement = connection.createStatement();
       statement.executeUpdate(sql);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
@@ -48,7 +32,7 @@ public class UserDao {
     String sql = "INSERT INTO USR (name, password) values ( '" + userModel.getUsername() + "', '" + userModel.getPassword() + "')";
 
     try {
-      statement = getConnection().createStatement();
+      statement = connection.createStatement();
       statement.executeUpdate(sql);
     } catch (SQLException exception) {
       System.out.println(exception.getMessage());
