@@ -3,6 +3,7 @@ package Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseConnection {
 
@@ -17,7 +18,6 @@ public class DatabaseConnection {
   private DatabaseConnection() {
   }
 
-
   public static DatabaseConnection getInstance()  {
     if (instance == null) {
       instance = new DatabaseConnection();
@@ -27,10 +27,11 @@ public class DatabaseConnection {
 
   public static Connection getConnection() {
 
-    getInstance();
-
     try {
       connection = DriverManager.getConnection(url, db_user, db_password);
+      Statement statement = connection.createStatement();
+      String sql = "CREATE TABLE IF NOT EXISTS USR (id SERIAL PRIMARY KEY, name VARCHAR(40) NOT NULL, password VARCHAR(40) NOT NULL)";
+      statement.executeUpdate(sql);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
     }
