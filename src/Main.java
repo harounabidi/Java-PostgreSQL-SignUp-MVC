@@ -1,13 +1,13 @@
-import controller.UserController;
+import controller.Controller;
 import model.UserModel;
-import view.UserView;
+import view.View;
 
 public class Main {
   public static void main(String[] args) {
-    UserView userView = new UserView();
+    View view = new View();
     UserModel userModel = new UserModel();
 
-    UserController userController = new UserController(userModel, userView);
-    userController.insertUser();
+    Controller controller = new Controller(userModel, view);
+    controller.insertUser();
   }
 }

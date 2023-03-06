@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class UserView extends JFrame {
+public class View extends JFrame {
   private JPanel mainPanel;
   private JTextField usernameField;
   private JPasswordField passwordField;
@@ -12,18 +12,14 @@ public class UserView extends JFrame {
   private JLabel passwordLabel;
   private JButton signUpBtn;
 
-  public UserView() {
+  public View() {
+
     this.signUpBtn = new JButton("Sign Up");
     this.usernameField = new JTextField(15);
     this.passwordField = new JPasswordField(15);
     this.usernameLabel = new JLabel("Username:");
     this.passwordLabel = new JLabel("Password:");
     this.mainPanel = new JPanel();
-
-    promptNewUser();
-  }
-
-  public void promptNewUser() {
 
     this.setSize(300, 150);
     this.setLocation(new Point(500, 300));
@@ -43,6 +39,7 @@ public class UserView extends JFrame {
     mainPanel.add(signUpBtn);
 
     this.setVisible(true);
+
   }
 
   public String getUsernameField() {

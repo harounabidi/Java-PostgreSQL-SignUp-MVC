@@ -30,7 +30,10 @@ public class DatabaseConnection {
     try {
       connection = DriverManager.getConnection(url, db_user, db_password);
       Statement statement = connection.createStatement();
-      String sql = "CREATE TABLE IF NOT EXISTS USR (id SERIAL PRIMARY KEY, name VARCHAR(40) NOT NULL, password VARCHAR(40) NOT NULL)";
+      String sql = "CREATE TABLE IF NOT EXISTS USR (" +
+              "id SERIAL PRIMARY KEY, " +
+              "name VARCHAR(40) NOT NULL, " +
+              "password VARCHAR(40) NOT NULL)";
       statement.executeUpdate(sql);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
